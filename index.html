@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Min enkle nettside</title>
+  <style>
+    /* Enkel, innebygd stil – fjern eller utvid etter behov */
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    body { margin: 0; line-height: 1.6; color: #222; }
+    header { background: #f5f5f5; padding: 1.5rem; border-bottom: 1px solid #e5e5e5; }
+    nav a { margin-right: 1rem; text-decoration: none; color: #0b63ce; }
+    main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    .kort { border: 1px solid #eee; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    footer { text-align: center; padding: 2rem 1rem; border-top: 1px solid #e5e5e5; color: #666; }
+    button { cursor: pointer; border: none; padding: .75rem 1rem; border-radius: 10px; background: #0b63ce; color: white; }
+    button:hover { filter: brightness(1.05); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hei! 👋</h1>
+    <nav>
+      <a href="#hjem">Hjem</a>
+      <a href="#om">Om</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hjem" class="kort">
+      <h2>Velkommen til min enkle nettside</h2>
+      <p>Dette er en minimal HTML-mal du kan bygge videre på. Den har litt stil, navigasjon og et lite JavaScript-eksempel.</p>
+      <button id="knapp">Klikk meg</button>
+    </section>
+
+    <section id="om">
+      <h3>Om siden</h3>
+      <p>Bytt ut teksten her med det du vil. Legg til flere seksjoner, bilder eller lenker.</p>
+    </section>
+
+    <section id="kontakt" class="kort">
+      <h3>Kontakt</h3>
+      <form onsubmit="sendMelding(event)">
+        <label>
+          Navn<br/>
+          <input type="text" name="navn" required />
+        </label>
+        <br/><br/>
+        <label>
+          Melding<br/>
+          <textarea name="melding" rows="4" required></textarea>
+        </label>
+        <br/><br/>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="år"></span> – Laget med ren HTML, CSS og litt JS.
+  </footer>
+
+  <script>
+    // Liten JS-bit for interaktivitet
+    const årEl = document.getElementById('år');
+    årEl.textContent = new Date().getFullYear();
+
+    document.getElementById('knapp').addEventListener('click', () => {
+      alert('Hei! Du klikket på knappen.');
+    });
+
+    function sendMelding(e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const navn = data.get('navn');
+      const melding = data.get('melding');
+      alert(`Takk, ${navn}! Meldingen din er mottatt:\n\n${melding}`);
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
