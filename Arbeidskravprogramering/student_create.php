@@ -38,7 +38,7 @@
           $sqlResultat1=mysqli_query($db,$sqlSetning1) or die ("ikke mulig &aring; hente data fra databasen");
           $antallRader=mysqli_num_rows($sqlResultat1); 
 
-          if ($antallRader>0)  /* fornavnet er registrert fra før */
+          if ($antallRader<=0)  /* fornavnet er registrert fra før */
             {
               print ("Klassen du vil registrere student i finnes ikke");
               exit;
