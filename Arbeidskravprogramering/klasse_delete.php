@@ -34,13 +34,14 @@
           if ($antallRader>0)  /* poststedet er ikke registrert */
             {
               print ("Kan ikke slette klasse som en student er registrert i");
+              exit;
             }
 
           $sqlSetning="SELECT * FROM klasse WHERE klassekode='$klassekode';";
           $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
           $antallRader=mysqli_num_rows($sqlResultat); 
 
-          if ($antallRader==0)  /* poststedet er ikke registrert */
+          elseif($antallRader==0)  /* poststedet er ikke registrert */
             {
               print ("Klassen finnes ikke");
             }
