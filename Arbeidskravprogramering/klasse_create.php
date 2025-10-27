@@ -1,32 +1,24 @@
+<?php  /* registrer-poststed */
+/*
+/*  Programmet lager et html-skjema for å registrere et poststed
+/*  Programmet registrerer data (postnr og poststed) i databasen
+*/
+?> 
 
-<!doctype html>
-<html lang="no">
-<head>
-<meta charset="utf-8">
-<title>Registrer klasse</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body class="container">
-<h1>Registrer klasse</h1>
-<form method="post" action="">
-  <label for="klassekode">Klassekode (maks 5 tegn)</label>
-  <input id="klassekode" name="klassekode" maxlength="5" required>
+<h3>Registrer klasse </h3>
 
-  <label for="klassenavn">Klassenavn</label>
-  <input id="klassenavn" name="klassenavn" maxlength="50" required>
-
-  <label for="studiumkode">Studiumkode</label>
-  <input id="studiumkode" name="studiumkode" maxlength="50" required>
-
-  <button type="submit">Lagre</button>
+<form method="post" action="" id="registrerPoststedSkjema" name="registrerPoststedSkjema">
+  Klassekode <input type="text" id="klassekode" name="klassekode" required /> <br/>
+  Klassenavn <input type="text" id="klassenavn" name="klassenavn" required /> <br/>
+  Studiumkode <input type="text" id="studiumkode" name="studiumkode" required /> <br/>
+  <input type="submit" value="Registrer poststed" id="registrerPoststedKnapp" name="registrerPoststedKnapp" /> 
+  <input type="reset" value="Nullstill" id="nullstill" name="nullstill" /> <br />
 </form>
-</body>
-</html>
 
 
 
 <?php 
-  if (isset($_POST ["submit"]))
+  if (isset($_POST ["registrerPoststedKnapp"]))
     {
       $klassekode=$_POST ["klassekode"];
       $klassenavn=$_POST ["klassenavn"];
