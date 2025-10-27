@@ -1,0 +1,56 @@
+<?php
+// Enkel oversiktsside
+?>
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRG120V – Obligatorisk oppgave 2</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>PRG120V – Obligatorisk oppgave 2</h1>
+    <a href="init_db.php" title="Opprett tabeller">Init DB</a>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h2>Klasse – registrering</h2>
+      <p>Legg inn ny klasse.</p>
+      <a href="klasse_create.php"><button>Registrer klasse</button></a>
+    </div>
+    <div class="card">
+      <h2>Klasse – visning</h2>
+      <p>Se alle klasser.</p>
+      <a href="klasse_list.php"><button>Vis klasser</button></a>
+    </div>
+    <div class="card">
+      <h2>Klasse – sletting</h2>
+      <p>Slett en klasse (hvis ikke brukt av studenter).</p>
+      <a href="klasse_delete.php"><button class="danger">Slett klasse</button></a>
+    </div>
+
+    <div class="card">
+      <h2>Student – registrering</h2>
+      <p>Legg inn ny student.</p>
+      <a href="student_create.php"><button>Registrer student</button></a>
+    </div>
+    <div class="card">
+      <h2>Student – visning</h2>
+      <p>Se alle studenter.</p>
+      <a href="student_list.php"><button>Vis studenter</button></a>
+    </div>
+    <div class="card">
+      <h2>Student – sletting</h2>
+      <p>Slett en student.</p>
+      <a href="student_delete.php"><button class="danger">Slett student</button></a>
+    </div>
+  </div>
+  <footer>
+    Laget i ren PHP (mysqli). Bruk <a href="init_db.php">Init DB</a> før første gangs bruk.
+  </footer>
+</div>
+</body>
+</html>
