@@ -1,13 +1,13 @@
-<?php
-require_once __DIR__ . '/config.php';
+<?php  /* db-tilkobling */
+/*
+/*  Programmet foretar tilkobling til database-server og valg av database
+*/
+$host = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$database = getenv('DB_DATABASE');
 
-$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-if ($mysqli->connect_error) {
-    die('Kunne ikke koble til databasen: ' . htmlspecialchars($mysqli->connect_error));
-}
+ $db=mysqli_connect($host,$username,$password,$database) or die ("ikke kontakt med database-server");
+    /* tilkobling til database-serveren utført */
+ ?>
 
-// Sett korrekt charset
-if (!$mysqli->set_charset('utf8mb4')) {
-    die('Kunne ikke sette charset: ' . htmlspecialchars($mysqli->error));
-}
-?>
