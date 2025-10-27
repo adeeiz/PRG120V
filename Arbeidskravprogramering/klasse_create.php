@@ -11,7 +11,7 @@
   Klassekode <input type="text" id="klassekode" name="klassekode" required /> <br/>
   Klassenavn <input type="text" id="klassenavn" name="klassenavn" required /> <br/>
   Studiumkode <input type="text" id="studiumkode" name="studiumkode" required /> <br/>
-  <input type="submit" value="Registrer poststed" id="registrerPoststedKnapp" name="registrerPoststedKnapp" /> 
+  <input type="submit" value="Registrer klasse" id="registrerPoststedKnapp" name="registrerPoststedKnapp" /> 
   <input type="reset" value="Nullstill" id="nullstill" name="nullstill" /> <br />
 </form>
 
