@@ -34,6 +34,15 @@
       else
         {
           include("db.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+          $sqlSetning1="SELECT * FROM klasse WHERE klassekode='$klassekode';";
+          $sqlResultat1=mysqli_query($db,$sqlSetning1) or die ("ikke mulig &aring; hente data fra databasen");
+          $antallRader=mysqli_num_rows($sqlResultat1); 
+
+          if ($antallRader>0)  /* fornavnet er registrert fra før */
+            {
+              print ("Klassen du vil registrere student i finnes ikke");
+              exit;
+            }
 
           $sqlSetning="SELECT * FROM student WHERE brukernavn='$brukernavn';";
           $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
