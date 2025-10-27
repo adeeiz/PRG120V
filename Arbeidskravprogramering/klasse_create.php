@@ -8,7 +8,7 @@
 </head>
 <body class="container">
 <h1>Registrer klasse</h1>
-<form method="post">
+<form method="post" action="">
   <label for="klassekode">Klassekode (maks 5 tegn)</label>
   <input id="klassekode" name="klassekode" maxlength="5" required>
 
@@ -20,7 +20,6 @@
 
   <button type="submit">Lagre</button>
 </form>
-<p><a href="index.php">Tilbake</a></p>
 </body>
 </html>
 
