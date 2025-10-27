@@ -1,51 +1,58 @@
-<?php
-require_once __DIR__ . '/db.php';
+<?php  /* slett-klasse */
+/*
+/*  Programmet lager et skjema for å velge et klasse som skal slettes  
+/*  Programmet sletter det valgte poststedet
+*/
+?> 
 
-$feedback = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $brukernavn = $_POST['brukernavn'] ?? '';
-    if ($brukernavn === '') {
-        $feedback = 'Velg en student å slette.';
-    } else {
-        $stmt = $mysqli->prepare('DELETE FROM student WHERE brukernavn = ?');
-        $stmt->bind_param('s', $brukernavn);
-        if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                $feedback = 'Student slettet.';
-            } else {
-                $feedback = 'Fant ikke valgt student, ingen endring.';
-            }
-        } else {
-            $feedback = 'Feil ved sletting: ' . htmlspecialchars($stmt->error);
-        }
-        $stmt->close();
-    }
-}
+<script src="funksjoner.js"> </script>
 
-$studenter = $mysqli->query('SELECT brukernavn, fornavn, etternavn FROM student ORDER BY brukernavn');
-?>
-<!doctype html>
-<html lang="no">
-<head>
-<meta charset="utf-8">
-<title>Slett student</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body class="container">
-<h1>Slett student</h1>
-<?php if ($feedback): ?><div class="notice"><?= htmlspecialchars($feedback) ?></div><?php endif; ?>
-<form method="post" onsubmit="return confirm('Er du sikker på at du vil slette valgt student?')">
-  <label for="brukernavn">Velg student</label>
-  <select id="brukernavn" name="brukernavn" required>
-    <option value="">— Velg —</option>
-    <?php if ($studenter): while ($row = $studenter->fetch_assoc()): ?>
-      <option value="<?= htmlspecialchars($row['brukernavn']) ?>">
-        <?= htmlspecialchars($row['brukernavn']) ?> – <?= htmlspecialchars($row['fornavn'] . ' ' . $row['etternavn']) ?>
-      </option>
-    <?php endwhile; endif; ?>
-  </select>
-  <button type="submit" class="danger">Slett</button>
+<h3>Slett klasse</h3>
+
+<form method="post" action="" id="slettPoststedSkjema" name="slettPoststedSkjema" onSubmit="return bekreft()">
+  brukernavn<input type="text" id="brukernavn" name="brukernavn" required /> <br/>
+  <input type="submit" value="Slett student" name="slettPoststedKnapp" id="slettPoststedKnapp" /> 
 </form>
-<p><a href="index.php">Tilbake</a></p>
-</body>
-</html>
+
+<?php
+  if (isset($_POST ["slettPoststedKnapp"]))
+    {	
+      $brukernavn=$_POST ["brukernavn"];
+	  
+	  if (!$brukernavn)
+        {
+          print ("brukernavn m&aring; fylles ut");
+        }
+      else
+        {
+          include("db.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+
+          $sqlValidering="SELECT * FROM student WHERE brukernavn='$brukernavn';";
+          $sqlResultat1=mysqli_query($db,$sqlValidering) or die ("ikke mulig &aring; hente data fra databasen");
+          $antallRader=mysqli_num_rows($sqlResultat1); 
+
+          if ($antallRader>0)  /* poststedet er ikke registrert */
+            {
+              print ("Kan ikke slette klasse som en student er registrert i");
+              exit;
+            }
+
+          $sqlSetning="SELECT * FROM student WHERE brukernavn='$brukernavn';";
+          $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
+          $antallRader=mysqli_num_rows($sqlResultat); 
+
+          if($antallRader==0)  /* poststedet er ikke registrert */
+            {
+              print ("Studenten finnes ikke");
+            }
+          else
+            {	  
+              $sqlSetning="DELETE FROM student WHERE brukernavn='$brukernavn';";
+              mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; slette data i databasen");
+                /* SQL-setning sendt til database-serveren */
+		
+              print ("F&oslash;lgende student er n&aring; slettet: $brukernavn  <br />");
+            }
+        }
+    }
+?> 
