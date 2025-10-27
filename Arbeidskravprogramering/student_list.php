@@ -20,7 +20,7 @@
       $rad=mysqli_fetch_array($sqlResultat);  /* ny rad hentet fra sp�rringsresultatet */
       $brukernavn=$rad["brukernavn"];        /* ELLER $postnr=$rad[0]; */
       $fornavn=$rad["fornavn"]; 
-      $ettersnavn=$rad["etternavn"];
+      $etternavn=$rad["etternavn"];
       $klassekode=$rad["klassekode"];
          /* ELLER $poststed=$rad[1]; */
 
