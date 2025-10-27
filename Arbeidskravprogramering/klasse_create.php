@@ -24,31 +24,41 @@
 </body>
 </html>
 
-<?php
-require_once __DIR__ . '/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $klassekode = strtoupper(trim($_POST['klassekode'] ?? ''));
-    $klassenavn = trim($_POST['klassenavn'] ?? '');
-    $studiumkode = trim($_POST['studiumkode'] ?? '');
 
-    if ($klassekode === '' || $klassenavn === '' || $studiumkode === '') {
-        echo 'Alle felter må fylles ut.';
-    } elseif (strlen($klassekode) > 5) {
-        echo 'Klassekode kan maks være 5 tegn.';
-    } else {
-        $stmt = $mysqli->prepare('INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES (?, ?, ?)');
-        if (!$stmt) {
-            echo 'Klarte ikke forberede spørring.';
-        } else {
-            $stmt->bind_param('sss', $klassekode, $klassenavn, $studiumkode);
-            if ($stmt->execute()) {
-                echo 'Klasse lagret!';
-            } else {
-                echo 'Feil ved lagring: ' . htmlspecialchars($stmt->error);
+<?php 
+  if (isset($_POST ["submit"]))
+    {
+      $klassekode=$_POST ["klassekode"];
+      $klassenavn=$_POST ["klassenavn"];
+      $studiumkode=$_POST ["studiumkode"];
+      
+
+
+      if (!$klassekode || !$klassenavn || !$studiumkode )
+        {
+          print ("B&aring;de klassekode, klassenavn og studiumkode m&aring; fylles ut");
+        }
+      else
+        {
+          include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+
+          $sqlSetning="SELECT * FROM klasse WHERE klassekode='$klassekode';";
+          $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
+          $antallRader=mysqli_num_rows($sqlResultat); 
+
+          if ($antallRader!=0)  /* klassenavnet er registrert fra før */
+            {
+              print ("klassen er registrert fra f&oslashr");
             }
-            $stmt->close();
+          else
+            {
+              $sqlSetning="INSERT INTO klasse VALUES('$klassekode','$klassenavn', '$studiumkode');";
+              mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; registrere data i databasen");
+                /* SQL-setning sendt til database-serveren */
+
+              print ("F&oslash;lgende klassenavn er n&aring; registrert: $klassekode $klassenavn $studiumkode "); 
+            }
         }
     }
-}
-?>
+?> 
