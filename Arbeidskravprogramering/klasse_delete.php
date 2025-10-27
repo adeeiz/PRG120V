@@ -41,7 +41,7 @@
           $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
           $antallRader=mysqli_num_rows($sqlResultat); 
 
-          elseif($antallRader==0)  /* poststedet er ikke registrert */
+          if($antallRader==0)  /* poststedet er ikke registrert */
             {
               print ("Klassen finnes ikke");
             }
