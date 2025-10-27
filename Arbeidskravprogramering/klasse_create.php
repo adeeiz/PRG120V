@@ -1,3 +1,30 @@
+
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<title>Registrer klasse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+<h1>Registrer klasse</h1>
+<?php if ($feedback): ?><div class="notice"><?= htmlspecialchars($feedback) ?></div><?php endif; ?>
+<form method="post">
+  <label for="klassekode">Klassekode (maks 5 tegn)</label>
+  <input id="klassekode" name="klassekode" maxlength="5" required>
+
+  <label for="klassenavn">Klassenavn</label>
+  <input id="klassenavn" name="klassenavn" maxlength="50" required>
+
+  <label for="studiumkode">Studiumkode</label>
+  <input id="studiumkode" name="studiumkode" maxlength="50" required>
+
+  <button type="submit">Lagre</button>
+</form>
+<p><a href="index.php">Tilbake</a></p>
+</body>
+</html>
+
 <?php
 require_once __DIR__ . '/db.php';
 
@@ -27,28 +54,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<!doctype html>
-<html lang="no">
-<head>
-<meta charset="utf-8">
-<title>Registrer klasse</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body class="container">
-<h1>Registrer klasse</h1>
-<?php if ($feedback): ?><div class="notice"><?= htmlspecialchars($feedback) ?></div><?php endif; ?>
-<form method="post">
-  <label for="klassekode">Klassekode (maks 5 tegn)</label>
-  <input id="klassekode" name="klassekode" maxlength="5" required>
-
-  <label for="klassenavn">Klassenavn</label>
-  <input id="klassenavn" name="klassenavn" maxlength="50" required>
-
-  <label for="studiumkode">Studiumkode</label>
-  <input id="studiumkode" name="studiumkode" maxlength="50" required>
-
-  <button type="submit">Lagre</button>
-</form>
-<p><a href="index.php">Tilbake</a></p>
-</body>
-</html>
