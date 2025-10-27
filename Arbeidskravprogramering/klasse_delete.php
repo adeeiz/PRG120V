@@ -1,51 +1,48 @@
-<?php
-require_once __DIR__ . '/db.php';
+<?php  /* slett-klasse */
+/*
+/*  Programmet lager et skjema for å velge et klasse som skal slettes  
+/*  Programmet sletter det valgte poststedet
+*/
+?> 
 
-$feedback = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $klassekode = $_POST['klassekode'] ?? '';
-    if ($klassekode === '') {
-        $feedback = 'Velg en klasse å slette.';
-    } else {
-        $stmt = $mysqli->prepare('DELETE FROM klasse WHERE klassekode = ?');
-        $stmt->bind_param('s', $klassekode);
-        if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                $feedback = 'Klasse slettet.';
-            } else {
-                $feedback = 'Fant ikke valgt klasse, ingen endring.';
-            }
-        } else {
-            $feedback = 'Feil ved sletting (sjekk om klassen brukes av studenter): ' . htmlspecialchars($stmt->error);
-        }
-        $stmt->close();
-    }
-}
+<script src="funksjoner.js"> </script>
 
-$klasser = $mysqli->query('SELECT klassekode, klassenavn FROM klasse ORDER BY klassekode');
-?>
-<!doctype html>
-<html lang="no">
-<head>
-<meta charset="utf-8">
-<title>Slett klasse</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body class="container">
-<h1>Slett klasse</h1>
-<?php if ($feedback): ?><div class="notice"><?= htmlspecialchars($feedback) ?></div><?php endif; ?>
-<form method="post" onsubmit="return confirm('Er du sikker på at du vil slette valgt klasse?')">
-  <label for="klassekode">Velg klasse</label>
-  <select id="klassekode" name="klassekode" required>
-    <option value="">— Velg —</option>
-    <?php if ($klasser): while ($row = $klasser->fetch_assoc()): ?>
-      <option value="<?= htmlspecialchars($row['klassekode']) ?>">
-        <?= htmlspecialchars($row['klassekode']) ?> – <?= htmlspecialchars($row['klassenavn']) ?>
-      </option>
-    <?php endwhile; endif; ?>
-  </select>
-  <button type="submit" class="danger">Slett</button>
+<h3>Slett klasse</h3>
+
+<form method="post" action="" id="slettPoststedSkjema" name="slettPoststedSkjema" onSubmit="return bekreft()">
+  Klassekode<input type="text" id="klassekode" name="klassekode" required /> <br/>
+  <input type="submit" value="Slett klasse" name="slettPoststedKnapp" id="slettPoststedKnapp" /> 
 </form>
-<p><a href="index.php">Tilbake</a></p>
-</body>
-</html>
+
+<?php
+  if (isset($_POST ["slettPoststedKnapp"]))
+    {	
+      $klassekode=$_POST ["klassekode"];
+	  
+	  if (!$klassekode)
+        {
+          print ("klassekode m&aring; fylles ut");
+        }
+      else
+        {
+          include("db.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+
+          $sqlSetning="SELECT * FROM klasse WHERE klassekode='$klassekode';";
+          $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
+          $antallRader=mysqli_num_rows($sqlResultat); 
+
+          if ($antallRader==0)  /* poststedet er ikke registrert */
+            {
+              print ("Klassen finnes ikke");
+            }
+          else
+            {	  
+              $sqlSetning="DELETE FROM klasse WHERE klassekode='$klassekode';";
+              mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; slette data i databasen");
+                /* SQL-setning sendt til database-serveren */
+		
+              print ("F&oslash;lgende klasse er n&aring; slettet: $klassekode  <br />");
+            }
+        }
+    }
+?> 
