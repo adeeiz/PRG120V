@@ -8,7 +8,6 @@
 </head>
 <body class="container">
 <h1>Registrer klasse</h1>
-<?php if ($feedback): ?><div class="notice"><?= htmlspecialchars($feedback) ?></div><?php endif; ?>
 <form method="post">
   <label for="klassekode">Klassekode (maks 5 tegn)</label>
   <input id="klassekode" name="klassekode" maxlength="5" required>
@@ -28,26 +27,25 @@
 <?php
 require_once __DIR__ . '/db.php';
 
-$feedback = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $klassekode = strtoupper(trim($_POST['klassekode'] ?? ''));
     $klassenavn = trim($_POST['klassenavn'] ?? '');
     $studiumkode = trim($_POST['studiumkode'] ?? '');
 
     if ($klassekode === '' || $klassenavn === '' || $studiumkode === '') {
-        $feedback = 'Alle felter må fylles ut.';
+        echo 'Alle felter må fylles ut.';
     } elseif (strlen($klassekode) > 5) {
-        $feedback = 'Klassekode kan maks være 5 tegn.';
+        echo 'Klassekode kan maks være 5 tegn.';
     } else {
         $stmt = $mysqli->prepare('INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES (?, ?, ?)');
         if (!$stmt) {
-            $feedback = 'Klarte ikke forberede spørring.';
+            echo 'Klarte ikke forberede spørring.';
         } else {
             $stmt->bind_param('sss', $klassekode, $klassenavn, $studiumkode);
             if ($stmt->execute()) {
-                $feedback = 'Klasse lagret!';
+                echo 'Klasse lagret!';
             } else {
-                $feedback = 'Feil ved lagring: ' . htmlspecialchars($stmt->error);
+                echo 'Feil ved lagring: ' . htmlspecialchars($stmt->error);
             }
             $stmt->close();
         }
