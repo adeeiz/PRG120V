@@ -32,8 +32,7 @@
       $klassekode=$_POST ["klassekode"];
       $klassenavn=$_POST ["klassenavn"];
       $studiumkode=$_POST ["studiumkode"];
-      
-
+    
 
       if (!$klassekode || !$klassenavn || !$studiumkode )
         {
@@ -41,7 +40,7 @@
         }
       else
         {
-          include("db-tilkobling.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
+          include("db.php");  /* tilkobling til database-serveren utført og valg av database foretatt */
 
           $sqlSetning="SELECT * FROM klasse WHERE klassekode='$klassekode';";
           $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
