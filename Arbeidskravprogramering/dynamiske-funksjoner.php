@@ -1,5 +1,6 @@
 <?php
 
+
 function listeboksKlasse()
 {
   include("db.php");  /* tilkobling til database-server og valg av database utført */
