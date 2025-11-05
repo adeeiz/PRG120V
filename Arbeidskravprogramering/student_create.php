@@ -11,7 +11,10 @@
   brukernavn <input type="text" id="brukernavn" name="brukernavn" required /> <br/>
   fornavn <input type="text" id="fornavn" name="fornavn" required /> <br/>
   etternavn <input type="text" id="etternavn" name="etternavn" required /> <br/>
-  klassekode <input type="text" id="klassekode" name="klassekode" required /> <br/>
+  klassekode <select name="klasse" id="klasse">
+    <option value="">velg klasse</option>
+    <?php include("dynamiske-funksjoner.php"); listeboksklasse(); ?> 
+  </select>  <br/>
   <input type="submit" value="Registrer student" id="registrerPoststedKnapp" name="registrerPoststedKnapp" /> 
   <input type="reset" value="Nullstill" id="nullstill" name="nullstill" /> <br />
 </form>
