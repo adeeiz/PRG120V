@@ -9,17 +9,17 @@
 
 <h3>Slett klasse</h3>
 
-<form method="post" action="" id="slettPoststedSkjema" name="slettPoststedSkjema" onSubmit="return bekreft()">
-  Poststed 
+<form method="post" action="" id="slettklasseSkjema" name="slettklasseSkjema" onSubmit="return bekreft()">
+  klasse 
   <select name="klasse" id="klasse">
     <option value="">velg klasse</option>
     <?php include("dynamiske-funksjoner.php"); listeboksklasse(); ?> 
   </select>  <br/>
-  <input type="submit" value="Velg poststed" id="velgPoststedKnapp" name="velgPoststedKnapp" /> 
+  <input type="submit" value="Velg klasse" id="velgklasseKnapp" name="velgklasseKnapp" /> 
 </form>
 
 <?php
-  if (isset($_POST ["slettPoststedKnapp"]))
+  if (isset($_POST ["slettklasseKnapp"]))
     {	
       $klassekode=$_POST ["klassekode"];
 	  
