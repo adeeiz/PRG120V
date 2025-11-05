@@ -7,7 +7,7 @@
 
 <h3>Registrer student </h3>
 
-<form method="post" action="" id="registrerPoststedSkjema" name="registrerPoststedSkjema">
+<form method="post" action="" id="registrerStudentSkjema" name="registrerStudentSkjema">
   brukernavn <input type="text" id="brukernavn" name="brukernavn" required /> <br/>
   fornavn <input type="text" id="fornavn" name="fornavn" required /> <br/>
   etternavn <input type="text" id="etternavn" name="etternavn" required /> <br/>
