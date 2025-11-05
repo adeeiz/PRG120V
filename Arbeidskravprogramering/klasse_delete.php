@@ -9,13 +9,13 @@
 
 <h3>Slett klasse</h3>
 
-<form method="post" action="" id="slettklasseSkjema" name="slettklasseSkjema" onSubmit="return bekreft()">
+<form method="post" action="" id="SlettklasseSkjema" name="SlettklasseSkjema" onSubmit="return bekreft()">
   klasse 
   <select name="klasse" id="klasse">
     <option value="">velg klasse</option>
     <?php include("dynamiske-funksjoner.php"); listeboksklasse(); ?> 
   </select>  <br/>
-  <input type="submit" value="slett klasse" id="velgklasseKnapp" name="velgklasseKnapp" /> 
+  <input type="submit" value="Slett klasse" id="velgklasseKnapp" name="velgklasseKnapp" /> 
 </form>
 
 <?php
