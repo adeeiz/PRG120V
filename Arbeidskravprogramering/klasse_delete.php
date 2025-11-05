@@ -19,9 +19,9 @@
 </form>
 
 <?php
-  if (isset($_POST ["slettklasseKnapp"]))
+  if (isset($_POST ["velgklasseKnapp"]))
     { 
-      $klassekode=$_POST ["klassekode"];
+      $klassekode=$_POST ["klasse"];
     
     if (!$klassekode)
         {
