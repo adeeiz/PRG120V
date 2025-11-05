@@ -1,7 +1,7 @@
 <?php  /* slett-klasse */
 /*
 /*  Programmet lager et skjema for å velge et klasse som skal slettes  
-/*  Programmet sletter det valgte poststedet
+/*  Programmet sletter det valgte klasse
 */
 ?> 
 
@@ -10,8 +10,12 @@
 <h3>Slett klasse</h3>
 
 <form method="post" action="" id="slettPoststedSkjema" name="slettPoststedSkjema" onSubmit="return bekreft()">
-  Klassekode<input type="text" id="klassekode" name="klassekode" required /> <br/>
-  <input type="submit" value="Slett klasse" name="slettPoststedKnapp" id="slettPoststedKnapp" /> 
+  Poststed 
+  <select name="klasse" id="klasse">
+    <option value="">velg klasse</option>
+    <?php include("dynamiske-funksjoner.php"); listeboksklasse(); ?> 
+  </select>  <br/>
+  <input type="submit" value="Velg poststed" id="velgPoststedKnapp" name="velgPoststedKnapp" /> 
 </form>
 
 <?php
@@ -31,7 +35,7 @@
           $sqlResultat1=mysqli_query($db,$sqlValidering) or die ("ikke mulig &aring; hente data fra databasen");
           $antallRader=mysqli_num_rows($sqlResultat1); 
 
-          if ($antallRader>0)  /* poststedet er ikke registrert */
+          if ($antallRader>0)  /* klasse er ikke registrert */
             {
               print ("Kan ikke slette klasse som en student er registrert i");
               exit;
@@ -41,7 +45,7 @@
           $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
           $antallRader=mysqli_num_rows($sqlResultat); 
 
-          if($antallRader==0)  /* poststedet er ikke registrert */
+          if($antallRader==0)  /* klasse er ikke registrert */
             {
               print ("Klassen finnes ikke");
             }
