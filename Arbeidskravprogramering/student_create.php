@@ -22,7 +22,7 @@
 
 
 <?php 
-  if (isset($_POST ["registrerPoststedKnapp"]))
+  if (isset($_POST ["registrerStudentKnapp"]))
     {
       $brukernavn=$_POST ["brukernavn"];
       $fornavn=$_POST ["fornavn"];
