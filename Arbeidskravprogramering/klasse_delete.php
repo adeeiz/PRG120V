@@ -15,7 +15,7 @@
     <option value="">velg klasse</option>
     <?php include("dynamiske-funksjoner.php"); listeboksklasse(); ?> 
   </select>  <br/>
-  <input type="submit" value="Velg klasse" id="velgklasseKnapp" name="velgklasseKnapp" /> 
+  <input type="submit" value="slett klasse" id="velgklasseKnapp" name="velgklasseKnapp" /> 
 </form>
 
 <?php
