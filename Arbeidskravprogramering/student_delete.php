@@ -7,18 +7,18 @@
 
 <script src="funksjoner.js"> </script>
 
-<h3>Slett kstudent</h3>
+<h3>Slett student</h3>
 
-<form method="post" action="" id="slettPoststedSkjema" name="slettPoststedSkjema" onSubmit="return bekreft()">
- <select name="sstudent" id="student">
-    <option value="">velg kstudent</option>
-    <?php include("dynamiske-funksjoner.php"); listebokskstudent(); ?> 
+<form method="post" action="" id="slettstudentSkjema" name="slettstudentSkjema" onSubmit="return bekreft()">
+ <select name="student" id="student">
+    <option value="">velg student</option>
+    <?php include("dynamiske-funksjoner.php"); listeboksStudent(); ?> 
   </select>  <br/> 
-  <input type="submit" value="Slett student" name="slettPoststedKnapp" id="slettPoststedKnapp" /> 
+  <input type="submit" value="Slett student" name="slettstudentKnapp" id="slettstudentKnapp" /> 
 </form>
 
 <?php
-  if (isset($_POST ["slettPoststedKnapp"]))
+  if (isset($_POST ["slettstudentKnapp"]))
     {	
       $brukernavn=$_POST ["brukernavn"];
 	  
