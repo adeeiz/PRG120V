@@ -1,16 +1,19 @@
-<?php  /* slett-klasse */
+<?php  /* slett-student */
 /*
-/*  Programmet lager et skjema for å velge et klasse som skal slettes  
+/*  Programmet lager et skjema for å velge et kstudent som skal slettes  
 /*  Programmet sletter det valgte poststedet
 */
 ?> 
 
 <script src="funksjoner.js"> </script>
 
-<h3>Slett klasse</h3>
+<h3>Slett kstudent</h3>
 
 <form method="post" action="" id="slettPoststedSkjema" name="slettPoststedSkjema" onSubmit="return bekreft()">
-  brukernavn<input type="text" id="brukernavn" name="brukernavn" required /> <br/>
+ <select name="sstudent" id="student">
+    <option value="">velg kstudent</option>
+    <?php include("dynamiske-funksjoner.php"); listebokskstudent(); ?> 
+  </select>  <br/> 
   <input type="submit" value="Slett student" name="slettPoststedKnapp" id="slettPoststedKnapp" /> 
 </form>
 
